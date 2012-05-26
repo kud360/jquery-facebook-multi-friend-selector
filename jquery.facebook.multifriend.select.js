@@ -38,7 +38,7 @@
 			labels: {
 				selected: "Selected",
 				filter_default: "Start typing a name",
-				filter_title: "Group or friend's Name :",
+				filter_title: "Group / Friend Name :",
 				all: "Everybody",
 				max_selected_message: "{0} of {1} selected"
 			}
