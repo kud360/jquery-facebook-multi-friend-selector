@@ -68,8 +68,8 @@
             "</div>" 
         );
         
-        var friend_container = $("#jfmfs-friend-container"),
-            container = $("#jfmfs-friend-selector"),
+        var friend_container = $(elem).find("#jfmfs-friend-container"),
+            container = $(elem).find("#jfmfs-friend-selector"),
 			preselected_friends_graph = arrayToObjectGraph(settings.pre_selected_friends),
 			excluded_friends_graph = arrayToObjectGraph(settings.exclude_friends),
             all_friends;
