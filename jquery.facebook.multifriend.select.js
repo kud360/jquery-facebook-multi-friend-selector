@@ -119,6 +119,14 @@
             return ids;
         };
         
+        this.getSelectedIdsmod = function() {
+            var ids = [];
+            $.each(elem.find(".jfmfs-friend.selected"), function(i, friend) {
+                ids.push({ "type" : $(friend).find(".friend-type").text() , "id" : $(friend).attr("id") });
+            });
+            return ids;
+        };
+        
         this.getSelectedIdsAndNames = function() {
             var selected = [];
             $.each(elem.find(".jfmfs-friend.selected"), function(i, friend) {
