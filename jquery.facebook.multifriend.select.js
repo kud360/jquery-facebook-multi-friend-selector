@@ -76,7 +76,12 @@
             
         FB.api('/me/friends?fields=' + settings.friend_fields, function(response) {
         FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
-            var bigdata = response.data.concat(response2.data);
+            var bigdata = $.map( response.data, function( a ) {
+  			return { "id" : a.id , "name" : a.name , "type" : "i"};   			
+            });
+            bigdata = bigdata.concat($.map( response2.data, function( a ) {
+            		return { "id" : a.id , "name" : a.name , "type" : "g"};   			
+            }));
             var sortedFriendData = bigdata.sort(settings.sorter),
                 preselectedFriends = {},
                 buffer = [],
@@ -85,7 +90,7 @@
             $.each(sortedFriendData, function(i, friend) {
 				if(! (friend.id in excluded_friends_graph)) {
 					selectedClass = (friend.id in preselected_friends_graph) ? "selected" : "";
-	                		buffer.push("<div class='jfmfs-friend " + selectedClass + " ' id='" + friend.id  +"'><img/><div class='friend-name'>" + friend.name + "</div></div>");            
+	                		buffer.push("<div class='jfmfs-friend " + selectedClass + " ' id='" + friend.id  +"'><img/><div class='friend-name'>" + friend.name + "</div><div class='friend-type'>" + friend.type + "</div></div>");            
 				}
             });
             friend_container.append(buffer.join(""));            
