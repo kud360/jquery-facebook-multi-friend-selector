@@ -45,6 +45,10 @@ limitations under the License.
     margin:0;
 }
 
+.jfmfs-friend p{
+    display:none;
+}
+
 .jfmfs-friend.selected img {
     border: 1px solid #233E75;
 }
