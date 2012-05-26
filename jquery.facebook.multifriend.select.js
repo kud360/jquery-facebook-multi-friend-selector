@@ -75,8 +75,8 @@
             all_friends;
             
         FB.api('/me/friends?fields=' + settings.friend_fields, function(response) {
-        FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
-            var sortedFriendData = response.concat(response2).data.sort(settings.sorter),
+        //FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
+            var sortedFriendData = response.data.sort(settings.sorter),
                 preselectedFriends = {},
                 buffer = [],
 		selectedClass = "";
@@ -97,7 +97,7 @@
             });
 
             init();
-        });
+        //});
         });
         
         
