@@ -144,8 +144,7 @@
         // ----------+----------+----------+----------+----------+----------+----------+
         
         var init = function() {
-            all_friends = $(".jfmfs-friend", elem);
-            
+            all_friends = $(elem).find(".jfmfs-friend");            
             // calculate friends per row
             first_element_offset_px = all_friends.first().offset().top;
             for(var i=0, l=all_friends.length; i < l; i++ ) {
