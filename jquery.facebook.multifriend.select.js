@@ -90,7 +90,7 @@
             $.each(sortedFriendData, function(i, friend) {
 				if(! (friend.id in excluded_friends_graph)) {
 					selectedClass = (friend.id in preselected_friends_graph) ? "selected" : "";
-	                		buffer.push("<div class='jfmfs-friend " + selectedClass + " ' id='" + friend.id  +"'><img/><div class='friend-name'>" + friend.name + "</div><div class='friend-type'>" + friend.type + "</div></div>");            
+	                		buffer.push("<div class='jfmfs-friend " + selectedClass + " ' id='" + friend.id  +"'><img/><div class='friend-name'>" + friend.name + "</div><p class='friend-type'>" + friend.type + "</p></div>");            
 				}
             });
             friend_container.append(buffer.join(""));            
