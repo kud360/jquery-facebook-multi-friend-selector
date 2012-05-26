@@ -74,7 +74,7 @@
 			excluded_friends_graph = arrayToObjectGraph(settings.exclude_friends),
             all_friends;
             
-        FB.api('/me/friends?fields=' + settings.friend_fields, function(response) {
+        FB.api('/me/groups?fields=' + settings.friend_fields, function(response) {
         //FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
             var sortedFriendData = response.data.sort(settings.sorter),
                 preselectedFriends = {},
