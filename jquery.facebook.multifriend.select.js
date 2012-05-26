@@ -122,9 +122,9 @@
         this.getSelectedIdsmod = function() {
             var ids = [];
             $.each(elem.find(".jfmfs-friend.selected"), function(i, friend) {
-                ids.push({ "type" : $(friend).find(".friend-type").text() , "id" : $(friend).attr("id") });
+                ids.push({ $(friend).find(".friend-type").text() + $(friend).attr("id") });
             });
-            return ids;
+            return ids.join(',');
         };
         
         this.getSelectedIdsAndNames = function() {
