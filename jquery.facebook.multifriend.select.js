@@ -74,9 +74,10 @@
 			excluded_friends_graph = arrayToObjectGraph(settings.exclude_friends),
             all_friends;
             
-        FB.api('/me/groups?fields=' + settings.friend_fields, function(response) {
-        //FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
-            var sortedFriendData = response.data.sort(settings.sorter),
+        FB.api('/me/friends?fields=' + settings.friend_fields, function(response) {
+        FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
+            var bigdata = response.data.concat(response2.data);
+            var sortedFriendData = bigdata.sort(settings.sorter),
                 preselectedFriends = {},
                 buffer = [],
 		selectedClass = "";
@@ -97,7 +98,7 @@
             });
 
             init();
-        //});
+        });
         });
         
         
