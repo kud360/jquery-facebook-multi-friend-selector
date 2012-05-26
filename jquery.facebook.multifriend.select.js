@@ -75,19 +75,19 @@
             all_friends;
             
         FB.api('/me/friends?fields=' + settings.friend_fields, function(response) {
-            var sortedFriendData = response.data.sort(settings.sorter),
+        FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
+            var sortedFriendData = response.concat(response2).data.sort(settings.sorter),
                 preselectedFriends = {},
                 buffer = [],
-			    selectedClass = "";
+		selectedClass = "";
             
             $.each(sortedFriendData, function(i, friend) {
 				if(! (friend.id in excluded_friends_graph)) {
 					selectedClass = (friend.id in preselected_friends_graph) ? "selected" : "";
-	                buffer.push("<div class='jfmfs-friend " + selectedClass + " ' id='" + friend.id  +"'><img/><div class='friend-name'>" + friend.name + "</div></div>");            
+	                		buffer.push("<div class='jfmfs-friend " + selectedClass + " ' id='" + friend.id  +"'><img/><div class='friend-name'>" + friend.name + "</div></div>");            
 				}
             });
-            friend_container.append(buffer.join(""));
-            
+            friend_container.append(buffer.join(""));            
             uninitializedImagefriendElements = $(".jfmfs-friend", elem);            
             uninitializedImagefriendElements.bind('inview', function (event, visible) {
                 if( $(this).attr('src') === undefined) {
@@ -97,6 +97,7 @@
             });
 
             init();
+        });
         });
         
         
