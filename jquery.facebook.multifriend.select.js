@@ -121,10 +121,14 @@
         
         this.getSelectedIdsmod = function() {
             var ids = [];
+            var gps = [];
             $.each(elem.find(".jfmfs-friend.selected"), function(i, friend) {
-                ids.push( $(friend).find(".friend-type").text() + $(friend).attr("id") );
+            	if($(friend).find(".friend-type").text()=="g")
+                	gps.push( $(friend).attr("id") );
+                else
+                	ids.push( $(friend).attr("id") );
             });
-            return ids.join('&');
+            return JSON.stringify({ "i" : ids , "g" : gps });
         };
         
         this.getSelectedIdsAndNames = function() {
