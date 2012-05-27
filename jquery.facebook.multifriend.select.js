@@ -328,7 +328,7 @@
         };
 
         var selectedCount = function() {
-            return $(this).parents("jfmfs-friend-selector").find(".jfmfs-friend.selected").length;
+            return $(this).parents("#jfmfs-friend-selector").find(".jfmfs-friend.selected").length;
         };
 
         var maxSelectedEnabled = function () {
@@ -337,7 +337,7 @@
         
         var updateMaxSelectedMessage = function() {
             var message = settings.labels.max_selected_message.replace("{0}", selectedCount()).replace("{1}", settings.max_selected);
-            $("#jfmfs-max-selected-wrapper").html( message );
+            $(this).parents("#jfmfs-friend-selector").find("#jfmfs-max-selected-wrapper").html( message );
         };
         
     };
