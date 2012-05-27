@@ -160,7 +160,7 @@
             elem.delegate(".jfmfs-friend", 'click', function(event) {
                 var onlyOne = settings.max_selected === 1,
                     isSelected = $(this).hasClass("selected"),
-                    isMaxSelected = $(".jfmfs-friend.selected").length >= settings.max_selected,
+                    isMaxSelected = friend_container.find(".jfmfs-friend.selected").length >= settings.max_selected,
                     alreadySelected = friend_container.find(".selected").attr('id') === $(this).attr('id');
                 
                 // if the element is being selected, test if the max number of items have
@@ -191,7 +191,7 @@
                             for(var i=start; i<=end; i++) {
                                 var aFriend = $( all_friends[i] );
                                 if(!aFriend.hasClass("hide-non-selected") && !aFriend.hasClass("hide-filtered")) {
-                                    if( maxSelectedEnabled() && $(".jfmfs-friend.selected").length < settings.max_selected ) {
+                                    if( maxSelectedEnabled() && friend_container.find(".jfmfs-friend.selected").length < settings.max_selected ) {
                                         $( all_friends[i] ).addClass("selected");                                        
                                     }
                                 }
@@ -216,7 +216,7 @@
             $("#jfmfs-filter-selected").click(function(event) {
 				event.preventDefault();
                 all_friends.not(".selected").addClass("hide-non-selected");
-                $(".filter-link").removeClass("selected");
+                $(this).parents('#jfmfs-friend-selector').find(".filter-link").removeClass("selected");
                 $(this).addClass("selected");
             });
 
@@ -224,7 +224,7 @@
             $("#jfmfs-filter-all").click(function(event) {
 				event.preventDefault();
                 all_friends.removeClass("hide-non-selected");
-                $(".filter-link").removeClass("selected");
+                $(this).parents('#jfmfs-friend-selector').find(".filter-link").removeClass("selected");
                 $(this).addClass("selected");
             });
 
@@ -316,7 +316,7 @@
             };
 
 			var updateSelectedCount = function() {
-				$("#jfmfs-selected-count").html( selectedCount() );
+				$(this).parents('#jfmfs-friend-selector').find("#jfmfs-selected-count").html( selectedCount() );
 			};
 
             friend_container.bind('scroll', $.debounce( 250, showImagesInViewPort ));
@@ -328,7 +328,7 @@
         };
 
         var selectedCount = function() {
-            return $(".jfmfs-friend.selected").length;
+            return $(this).parents("jfmfs-friend-selector").find(".jfmfs-friend.selected").length;
         };
 
         var maxSelectedEnabled = function () {
