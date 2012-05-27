@@ -217,18 +217,18 @@
             });
 
             // filter by selected, hide all non-selected
-            $("#jfmfs-filter-selected").click(function(event) {
+            $(elem).find("#jfmfs-filter-selected").click(function(event) {
 				event.preventDefault();
                 all_friends.not(".selected").addClass("hide-non-selected");
-                $(this).parents('#jfmfs-friend-selector').find(".filter-link").removeClass("selected");
+                $(elem).find(".filter-link").removeClass("selected");
                 $(this).addClass("selected");
             });
 
             // remove filter, show all
-            $("#jfmfs-filter-all").click(function(event) {
+            $(elem).find("#jfmfs-filter-all").click(function(event) {
 				event.preventDefault();
                 all_friends.removeClass("hide-non-selected");
-                $(this).parents('#jfmfs-friend-selector').find(".filter-link").removeClass("selected");
+                $(elem).find(".filter-link").removeClass("selected");
                 $(this).addClass("selected");
             });
 
@@ -320,7 +320,7 @@
             };
 
 			var updateSelectedCount = function() {
-				$(this).parents('#jfmfs-friend-selector').find("#jfmfs-selected-count").html( selectedCount() );
+				$(elem).find("#jfmfs-selected-count").html( selectedCount() );
 			};
 
             friend_container.bind('scroll', $.debounce( 250, showImagesInViewPort ));
@@ -332,7 +332,7 @@
         };
 
         var selectedCount = function() {
-            return $(this).parents("#jfmfs-friend-selector").find(".jfmfs-friend.selected").length;
+            return $(elem).find(".jfmfs-friend.selected").length;
         };
 
         var maxSelectedEnabled = function () {
@@ -341,7 +341,7 @@
         
         var updateMaxSelectedMessage = function() {
             var message = settings.labels.max_selected_message.replace("{0}", selectedCount()).replace("{1}", settings.max_selected);
-            $(this).parents("#jfmfs-friend-selector").find("#jfmfs-max-selected-wrapper").html( message );
+            $(elem).find("#jfmfs-max-selected-wrapper").html( message );
         };
         
     };
