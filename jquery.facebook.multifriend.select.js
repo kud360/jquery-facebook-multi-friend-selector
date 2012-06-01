@@ -1,4 +1,4 @@
-// Copyright 2010 Mike Brevoort http://mike.brevoort.com @mbrevoort
+-// Copyright 2010 Mike Brevoort http://mike.brevoort.com @mbrevoort
 // 
 // v5.0 jquery-facebook-multi-friend-selector
 // 
@@ -329,15 +329,8 @@
             showImagesInViewPort();
 	    updateSelectedCount();
             elem.trigger("jfmfs.friendload.finished");            
-
-    // todo, make this more ambiguous
-    $.expr[':'].Contains = function(a, i, m) { 
-        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
-    };        
-
-})(jQuery);
-
- 	$.fn.jfmfs = function(options) {
+            
+            $.fn.jfmfs = function(options) {
         	return this.each(function() {
             		var element = $(this);            
            		 // Return early if this element already has a plugin instance
@@ -347,6 +340,16 @@
             		// Store plugin object in this element's data
             		element.data('jfmfs', jfmfs);            
         	});
+            };
+
+    // todo, make this more ambiguous
+    $.expr[':'].Contains = function(a, i, m) { 
+        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
+    };        
+
+})(jQuery);
+
+ 
  	};
 
 if($.debounce === undefined) {
