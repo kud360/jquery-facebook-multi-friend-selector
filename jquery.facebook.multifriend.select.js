@@ -328,9 +328,16 @@
             updateMaxSelectedMessage();                      
             showImagesInViewPort();
 	    updateSelectedCount();
-            elem.trigger("jfmfs.friendload.finished");
-            
-    	     $.fn.jfmfs = function(options) {
+            elem.trigger("jfmfs.friendload.finished");            
+
+    // todo, make this more ambiguous
+    $.expr[':'].Contains = function(a, i, m) { 
+        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
+    };        
+
+})(jQuery);
+
+ 	$.fn.jfmfs = function(options) {
         	return this.each(function() {
             		var element = $(this);            
            		 // Return early if this element already has a plugin instance
@@ -338,15 +345,9 @@
             		// pass options to plugin constructor
             		var jfmfs = new JFMFS(this, options);            
             		// Store plugin object in this element's data
-            		element.data('jfmfs', jfmfs);
-            
-        });
-    // todo, make this more ambiguous
-    $.expr[':'].Contains = function(a, i, m) { 
-        return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
-    };        
-
-})(jQuery);
+            		element.data('jfmfs', jfmfs);            
+        	});
+ 	};
 
 if($.debounce === undefined) {
     /*
