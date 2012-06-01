@@ -74,15 +74,8 @@
 			excluded_friends_graph = arrayToObjectGraph(settings.exclude_friends),
             all_friends;
             
-        FB.api('/me/friends?fields=' + settings.friend_fields, function(response) {
-        FB.api('/me/groups?fields=' + settings.friend_fields, function(response2) {
-            var bigdata = $.map( response.data, function( a ) {
-  			return { "id" : a.id , "name" : a.name , "type" : "i"};   			
-            });
-            bigdata = bigdata.concat($.map( response2.data, function( a ) {
-            		return { "id" : a.id , "name" : a.name , "type" : "g"};   			
-            }));
-            var sortedFriendData = bigdata.sort(settings.sorter),
+        
+            var sortedFriendData = $.parseJSON($('#jfmfs-data').html()).sort(settings.sorter),
                 preselectedFriends = {},
                 buffer = [],
 		selectedClass = "";
@@ -102,10 +95,7 @@
                 $(this).unbind('inview');
             });
 
-            init();
-        });
-        });
-        
+            init();        
         
         // ----------+----------+----------+----------+----------+----------+----------+
         // Public functions
