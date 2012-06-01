@@ -27,21 +27,21 @@
         var settings = $.extend({
             max_selected: -1,
             max_selected_message: "{0} of {1} selected",
-			pre_selected_friends: [],
-			exclude_friends: [],
-			friend_fields: "id,name",
-			sorter: function(a, b) {
-                var x = a.name.toLowerCase();
+	    pre_selected_friends: [],
+	    exclude_friends: [],
+	    friend_fields: "id,name",
+	    sorter: function(a, b) {
+            	var x = a.name.toLowerCase();
                 var y = b.name.toLowerCase();
                 return ((x < y) ? -1 : ((x > y) ? 1 : 0));
             },
-			labels: {
-				selected: "Selected",
-				filter_default: "Start typing a name",
-				filter_title: "Group / Friend Name :",
-				all: "Everybody",
-				max_selected_message: "{0} of {1} selected"
-			}
+	    labels: {
+		selected: "Selected",
+	    	filter_default: "Start typing a name",
+	    	filter_title: "Group / Friend Name :",
+	    	all: "Everybody",
+	    	max_selected_message: "{0} of {1} selected"
+	    }
         }, options || {});
         var lastSelected;  // used when shift-click is performed to know where to start from to select multiple elements
                 
@@ -94,8 +94,6 @@
                 }
                 $(this).unbind('inview');
             });
-
-            init();        
         
         // ----------+----------+----------+----------+----------+----------+----------+
         // Public functions
@@ -133,11 +131,24 @@
             all_friends.removeClass("selected");
         };
         
+        var selectedCount = function() {
+            return $(elem).find(".jfmfs-friend.selected").length;
+        };
+
+        var maxSelectedEnabled = function () {
+            return settings.max_selected > 0;
+        };
+        
+        var updateMaxSelectedMessage = function() {
+            var message = settings.labels.max_selected_message.replace("{0}", selectedCount()).replace("{1}", settings.max_selected);
+            $(elem).find("#jfmfs-max-selected-wrapper").html( message );
+        };
+        
         // ----------+----------+----------+----------+----------+----------+----------+
         // Private functions
         // ----------+----------+----------+----------+----------+----------+----------+
         
-        var init = function() {
+        
             all_friends = $(elem).find(".jfmfs-friend");            
             // calculate friends per row
             first_element_offset_px = all_friends.first().offset().top;
@@ -205,7 +216,7 @@
                 }
                 elem.trigger("jfmfs.selection.changed", [obj.getSelectedIdsAndNames()]);
             });
-
+     
             // filter by selected, hide all non-selected
             $(elem).find("#jfmfs-filter-selected").click(function(event) {
 				event.preventDefault();
@@ -309,56 +320,31 @@
                 });
             };
 
-			var updateSelectedCount = function() {
-				$(elem).find("#jfmfs-selected-count").html( selectedCount() );
-			};
+	    var updateSelectedCount = function() {
+		$(elem).find("#jfmfs-selected-count").html( selectedCount() );
+	    };
 
             friend_container.bind('scroll', $.debounce( 250, showImagesInViewPort ));
-
             updateMaxSelectedMessage();                      
             showImagesInViewPort();
-			updateSelectedCount();
+	    updateSelectedCount();
             elem.trigger("jfmfs.friendload.finished");
-        };
-
-        var selectedCount = function() {
-            return $(elem).find(".jfmfs-friend.selected").length;
-        };
-
-        var maxSelectedEnabled = function () {
-            return settings.max_selected > 0;
-        };
-        
-        var updateMaxSelectedMessage = function() {
-            var message = settings.labels.max_selected_message.replace("{0}", selectedCount()).replace("{1}", settings.max_selected);
-            $(elem).find("#jfmfs-max-selected-wrapper").html( message );
-        };
-        
-    };
-    
-
-    
-    $.fn.jfmfs = function(options) {
-        return this.each(function() {
-            var element = $(this);
             
-            // Return early if this element already has a plugin instance
-            if (element.data('jfmfs')) { return; }
-            
-            // pass options to plugin constructor
-            var jfmfs = new JFMFS(this, options);
-            
-            // Store plugin object in this element's data
-            element.data('jfmfs', jfmfs);
+    	     $.fn.jfmfs = function(options) {
+        	return this.each(function() {
+            		var element = $(this);            
+           		 // Return early if this element already has a plugin instance
+            		if (element.data('jfmfs')) { return; }            
+            		// pass options to plugin constructor
+            		var jfmfs = new JFMFS(this, options);            
+            		// Store plugin object in this element's data
+            		element.data('jfmfs', jfmfs);
             
         });
-    };
-    
     // todo, make this more ambiguous
     $.expr[':'].Contains = function(a, i, m) { 
         return $(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0; 
-    };
-        
+    };        
 
 })(jQuery);
 
