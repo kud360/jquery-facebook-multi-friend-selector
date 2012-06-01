@@ -139,6 +139,10 @@
             return settings.max_selected > 0;
         };
         
+        var updateSelectedCount = function() {
+		$(elem).find("#jfmfs-selected-count").html( selectedCount() );
+	    };
+        
         var updateMaxSelectedMessage = function() {
             var message = settings.labels.max_selected_message.replace("{0}", selectedCount()).replace("{1}", settings.max_selected);
             $(elem).find("#jfmfs-max-selected-wrapper").html( message );
@@ -319,16 +323,15 @@
                     }              
                 });
             };
-
-	    var updateSelectedCount = function() {
-		$(elem).find("#jfmfs-selected-count").html( selectedCount() );
-	    };
+	    
 
             friend_container.bind('scroll', $.debounce( 250, showImagesInViewPort ));
             updateMaxSelectedMessage();                      
             showImagesInViewPort();
 	    updateSelectedCount();
-            elem.trigger("jfmfs.friendload.finished");            
+            elem.trigger("jfmfs.friendload.finished");
+            
+    };
             
             $.fn.jfmfs = function(options) {
         	return this.each(function() {
